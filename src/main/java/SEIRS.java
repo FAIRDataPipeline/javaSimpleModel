@@ -1,3 +1,4 @@
+import com.opencsv.exceptions.CsvValidationException;
 import org.fairdatapipeline.api.*;
 import org.fairdatapipeline.file.CleanableFileChannel;
 
@@ -9,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import com.opencsv.CSVReader;
 
 /******************************************************************************
  *  SEIRS ODE model in Java
@@ -21,7 +23,7 @@ import java.util.Map;
 class SEIRS {
 
 
-    public void SEIR(){
+    public void SEIRS(){
 
     }
 
@@ -39,6 +41,10 @@ class SEIRS {
                 }
             }catch(FileNotFoundException e){
                 System.err.println("can't open the file!");
+            }catch(IOException e) {
+                System.err.println("error reading parameter CSV");
+            }catch(CsvValidationException e){
+                System.err.println("bad CSV");
             }
 
             Data_product_write dpw = cr.get_dp_for_write("SEIRS/output");
