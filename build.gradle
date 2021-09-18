@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.FAIRDataPipeline.javaDataPipeline:api:8c92555a7a'
+    implementation 'com.github.FAIRDataPipeline.javaDataPipeline:api:edfe6eb7d9'
     implementation 'com.opencsv:opencsv:5.5.2'
 }
 
