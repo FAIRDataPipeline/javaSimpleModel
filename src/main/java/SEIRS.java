@@ -1,6 +1,8 @@
 import org.fairdatapipeline.api.*;
 import org.fairdatapipeline.file.CleanableFileChannel;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -19,11 +21,39 @@ import java.util.Map;
 class SEIRS {
 
 
-    public void setParams_SEIR(){
+    public void SEIR(){
 
     }
 
-    public void run(Path configPath, Path scriptPath, String regToken) {
+
+    public void runFromExternal(Path configPath, Path scriptPath, String regToken) {
+        try(Coderun cr =  new Coderun(configPath, scriptPath, regToken)) {
+            Map<String, Double> params = new HashMap<>();
+            Data_product_read dp = cr.get_dp_for_read("");
+            try {
+                FileReader fr = new FileReader(dp.getComponent().readLink().toString());
+                CSVReader r = new CSVReader(fr);
+                String[] line;
+                while ((line = r.readNext()) != null) {
+                    params.put(line[0], Double.parseDouble(line[1]));
+                }
+            }catch(FileNotFoundException e){
+                System.err.println("can't open the file!");
+            }
+
+            Data_product_write dpw = cr.get_dp_for_write("SEIRS/output");
+            try {
+                CleanableFileChannel f = dpw.getComponent().writeFileChannel();
+                do_SEIRS(params, f);
+            }catch(IOException e) {
+                System.err.println("failed to write output to file");
+            }
+
+        }
+    }
+
+
+    public void runFromPrepared(Path configPath, Path scriptPath, String regToken) {
         try(Coderun cr =  new Coderun(configPath, scriptPath, regToken)) {
             Map<String, Double> params = new HashMap<>();
             Data_product_read dp = cr.get_dp_for_read("SEIRS/params");
