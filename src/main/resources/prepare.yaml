@@ -14,5 +14,6 @@ read:
 
 write:
   - data_product: SEIRS/params
+    file_type: toml
     use:
       version: 0.0.1

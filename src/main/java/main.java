@@ -20,7 +20,7 @@ public class main {
             SEIRS s = new SEIRS();
             s.run(Path.of(args[1]), Path.of(args[2]), System.getenv("REGTOKEN"));
         }else{
-            System.err.println("first argument must be 'prepare' or 'seirs'");
+            System.err.println("first argument must be 'seirsFromExternal', 'seirsFromPrepared' or 'seirs'");
         }
     }
 
