@@ -1,7 +1,9 @@
 run_metadata:
   default_input_namespace: bram
   description: SEIRS Model
-  script: gradle run --args "seirsFromExternal ${{CONFIG_DIR}}config.yaml ${{CONFIG_DIR}}script.sh"
+  script: |
+    export REGTOKEN=${{LOCAL_TOKEN}}
+    gradle run --args "seirsFromExternal ${{CONFIG_DIR}}config.yaml ${{CONFIG_DIR}}script.sh"
 
 register:
 - namespace: PSU
