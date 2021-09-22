@@ -2,6 +2,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import org.fairdatapipeline.api.*;
 import org.fairdatapipeline.file.CleanableFileChannel;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -31,23 +32,39 @@ class SEIRS {
     public void runFromExternal(Path configPath, Path scriptPath, String regToken) {
         try(Coderun cr =  new Coderun(configPath, scriptPath, regToken)) {
             Map<String, Double> params = new HashMap<>();
-            Data_product_read dp = cr.get_dp_for_read("");
+            Data_product_read dp = cr.get_dp_for_read("SEIRS_model/parameters");
             try {
-                FileReader fr = new FileReader(dp.getComponent().readLink().toString());
+                Path filepath = dp.getComponent().readLink();
+                FileReader fr = new FileReader(filepath.toString());
                 CSVReader r = new CSVReader(fr);
                 String[] line;
+                int i = 0;
+                r.readNext(); // ignore header
                 while ((line = r.readNext()) != null) {
                     params.put(line[0], Double.parseDouble(line[1]));
+                    i += 1;
                 }
             }catch(FileNotFoundException e){
-                System.err.println("can't open the file!");
+                System.out.println("FileNotFoundException: can't find the file: " + e);
+                e.printStackTrace();
+                System.exit(1);
             }catch(IOException e) {
-                System.err.println("error reading parameter CSV");
+                System.out.println("error reading parameter CSV: " + e);
+                System.exit(1);
             }catch(CsvValidationException e){
-                System.err.println("bad CSV");
+                System.out.println("bad CSV: " + e);
+                System.exit(1);
+            }catch(Exception e) {
+                System.out.print("Exception reading parameters: " + e);
+                System.exit(1);
             }
 
-            Data_product_write dpw = cr.get_dp_for_write("SEIRS/output");
+            // set initial state:
+            params.put("S", 0.999);
+            params.put("E", 0.001);
+            params.put("I", 0.0);
+            params.put("R", 0.0);
+            Data_product_write dpw = cr.get_dp_for_write("SEIRS_model/results/model_output");
             try {
                 CleanableFileChannel f = dpw.getComponent().writeFileChannel();
                 do_SEIRS(params, f);
