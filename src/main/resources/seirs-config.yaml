@@ -2,7 +2,6 @@ run_metadata:
   default_input_namespace: bram
   description: SEIRS Model
   script: |
-    export REGTOKEN=${{LOCAL_TOKEN}}
     gradle run --args "seirsFromExternal ${{CONFIG_DIR}}config.yaml ${{CONFIG_DIR}}script.sh"
 
 register:
@@ -27,3 +26,5 @@ write:
 - data_product: SEIRS_model/results/model_output
   description: SEIRS model results
   file_type: csv
+  use:
+    data_product: SEIRS_model/results/model_output/java
