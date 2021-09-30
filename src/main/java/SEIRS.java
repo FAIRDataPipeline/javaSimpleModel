@@ -146,7 +146,7 @@ class SEIRS {
         
         String line;
 
-        line = "year.fraction,S,E,I,R\n";
+        line = "time,S,E,I,R\n";
         f.write(ByteBuffer.wrap(line.getBytes(StandardCharsets.UTF_8)));
         line = (0) + "," + S[0] + "," + E[0] + "," + I[0] + "," + R[0] + "\n";
         f.write(ByteBuffer.wrap(line.getBytes(StandardCharsets.UTF_8)));

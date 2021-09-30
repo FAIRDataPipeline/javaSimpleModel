@@ -1,6 +1,6 @@
 run_metadata:
   default_input_namespace: bram
-  description: SEIRS Model
+  description: SEIRS Model java
   script: |
     gradle run --args "${{CONFIG_DIR}}"
 
