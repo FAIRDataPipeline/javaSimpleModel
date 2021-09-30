@@ -69,7 +69,7 @@ class SEIRS {
                 CleanableFileChannel f = dpw.getComponent().writeFileChannel();
                 do_SEIRS(params, f);
             }catch(IOException e) {
-                System.err.println("failed to write output to file");
+                System.err.println("failed to write output to file: " + e);
             }
 
         }
@@ -79,7 +79,7 @@ class SEIRS {
     public void runFromPrepared(Path configPath, Path scriptPath, String regToken) {
         try(Coderun cr =  new Coderun(configPath, scriptPath, regToken)) {
             Map<String, Double> params = new HashMap<>();
-            Data_product_read dp = cr.get_dp_for_read("SEIRS/params");
+            Data_product_read dp = cr.get_dp_for_read("SEIRS_model/preparedParams");
             params.put("S", (Double) dp.getComponent("S").readEstimate());
             params.put("E", (Double) dp.getComponent("E").readEstimate());
             params.put("I", (Double) dp.getComponent("I").readEstimate());
@@ -91,12 +91,12 @@ class SEIRS {
             params.put("beta", (Double) dp.getComponent("beta").readEstimate());
             params.put("alpha", (Double) dp.getComponent("alpha").readEstimate());
 
-            Data_product_write dpw = cr.get_dp_for_write("SEIRS/output");
+            Data_product_write dpw = cr.get_dp_for_write("SEIRS_model/results/fromPreparedParams");
             try {
                 CleanableFileChannel f = dpw.getComponent().writeFileChannel();
                 do_SEIRS(params, f);
             }catch(IOException e) {
-                System.err.println("failed to write output to file");
+                System.err.println("failed to write output to file: " + e);
             }
 
         }
@@ -145,6 +145,12 @@ class SEIRS {
         double sigma_d = 1 / inv_sigma; 
         
         String line;
+
+        line = "year.fraction,S,E,I,R\n";
+        f.write(ByteBuffer.wrap(line.getBytes(StandardCharsets.UTF_8)));
+        line = (0) + "," + S[0] + "," + E[0] + "," + I[0] + "," + R[0] + "\n";
+        f.write(ByteBuffer.wrap(line.getBytes(StandardCharsets.UTF_8)));
+
         for (int i = 0; i < time_steps; i++) {
             double dSdt  = mu_d*N - (beta*S[i]*I[i])/N + omega_d*R[i]  - mu_d*S[i]; 
             double dEdt  = -sigma_d*E[i]  + (beta*S[i]*I[i])/N - mu_d*E[i];

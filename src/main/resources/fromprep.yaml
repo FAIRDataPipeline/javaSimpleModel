@@ -1,0 +1,16 @@
+run_metadata:
+  description: SEIRS From Prepared DP
+  default_input_namespace: bram
+  default_output_namespace: bram
+  script: |
+    gradle run --args="--seirsFromPrepared ${{CONFIG_DIR}}"
+
+read:
+  - data_product: SEIRS_model/preparedParams
+    use:
+      version: 0.0.1
+
+write:
+  - data_product: SEIRS_model/results/fromPreparedParams
+    use:
+      version: 0.0.1

@@ -1,19 +1,11 @@
-fail_on_hash_mismatch: True
 run_metadata:
-  description: SEIRS first attempt
-  local_data_registry_url: http://localhost:8000/api/
-  default_input_namespace: SEIRS test
-  default_output_namespace: SEIRS test
-  write_data_store: D:\datastore
-  local_repo: local repo
-  script: ''
-  latest_commit: 988637ffb95381375f6b22e2281fea1bcb6c8fe0
-  remote_repo: https://github.com/fake_org/fake_repo/
-
-read:
+  description: SEIRS Prepare parameters DP
+  default_output_namespace: bram
+  script: |
+    gradle run --args "--prepare ${{CONFIG_DIR}}"
 
 write:
-  - data_product: SEIRS/params
+  - data_product: SEIRS_model/preparedParams
     file_type: toml
     use:
       version: 0.0.1

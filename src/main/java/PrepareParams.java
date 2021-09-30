@@ -8,7 +8,7 @@ public class PrepareParams {
 
     public void run(Path configPath, Path scriptPath, String regtoken) {
         try (Coderun cr = new Coderun(configPath, scriptPath, regtoken)){
-            Data_product_write dp = cr.get_dp_for_write("SEIRS/params");
+            Data_product_write dp = cr.get_dp_for_write("SEIRS_model/preparedParams");
             dp.getComponent("S").writeEstimate(0.999);
             dp.getComponent("E").writeEstimate(0.001);
             dp.getComponent("I").writeEstimate(0.0);
