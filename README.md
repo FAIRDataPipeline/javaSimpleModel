@@ -4,7 +4,7 @@ A simple example of an SEIRS epidemiological model using the [FAIR Data Pipeline
 
 ## Installation of dependencies
 
-First, install Java (JDK v.11 or later), and gradle (v.6.5 or later) on your system. Then install the FAIR data registry if it is not already installed - see [here](https://fairdatapipeline.github.io/docs/local_registry/) for instructions. The [javaDataPipeline](https://github.com/FAIRDataPipeline/javaDataPipeline) API is already registered on [JitPack](https://jitpack.io), so you don't need to install it manually.
+First, install Java (JDK v.11 or later), and gradle (v.6.5 or later) on your system. Then install the FAIR data registry if it is not already installed - see [here](https://fairdatapipeline.github.io/docs/local_registry/) for instructions. The [javaDataPipeline](https://github.com/FAIRDataPipeline/javaDataPipeline) API is registered on [Maven Central](https://repo1.maven.org/maven2/org/fairdatapipeline/api/), so gradle will automatically resolve it as a dependency.
 
 ## Installing the command line tools
 
@@ -55,3 +55,7 @@ fair run src/main/resources/seirs-config.yaml
 ```
 
 That's it! If you go to the local registry in your browser now (by default at http://localhost:8000), you should see the input and output data recorded in the registry.
+
+## Other examples
+
+In the [resources](https://github.com/FAIRDataPipeline/javaSimpleModel/blob/master/src/main/resources/) folder you will find two other example config files, one of which can create a new data product with parameters for the SEIRS model (in FAIR Data Pipeline TOML parameter file format), the other runs the same SEIRS model again using the TOML parameter Data Product.
