@@ -1,6 +1,6 @@
 # javaSimpleModel
-![build](https://github.com/FAIRDataPipeline/simpleJavaModel/actions/workflows/gradle-build.yml/badge.svg)
-![run w fair cli](https://github.com/FAIRDataPipeline/simpleJavaModel/actions/workflows/runWithFairCli.yml/badge.svg)
+![build](https://github.com/FAIRDataPipeline/javaSimpleModel/actions/workflows/gradle-build.yml/badge.svg)
+![run w fair cli](https://github.com/FAIRDataPipeline/javaSimpleModel/actions/workflows/runWithFairCli.yml/badge.svg)
 [![License: GPL-3.0](https://img.shields.io/badge/licence-GPL--3-yellow)](https://opensource.org/licenses/GPL-3.0)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5562079.svg)](https://doi.org/10.5281/zenodo.5562079)
 
