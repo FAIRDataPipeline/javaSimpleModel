@@ -1,0 +1,28 @@
+{
+  "title": "Simple Java Model - SEIRS example for javaDataPipeline",
+  "description": "simple example to demonstrate the javaDataPipeline",
+  "upload_type": "software",
+  "creators": [
+    {
+      "affiliation": "Biomathematics and Statistics Scotland",
+      "name": "Boskamp, Bram",
+      "orcid": "0000-0002-5446-3209"
+    }
+  ],
+  "access_right": "open",
+  "license": "GPL-3.0+",
+  "related_identifiers": [
+    {
+      "scheme": "url",
+      "identifier": "https://github.com/FAIRDataPipeline/javaSimpleModel",
+      "relation": "isIdenticalTo"
+    }
+  ],
+  "keywords": [
+    "FAIR",
+    "Java",
+    "data",
+    "SEIRS",
+    "example"
+  ]
+}
