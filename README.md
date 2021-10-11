@@ -1,6 +1,6 @@
 # javaSimpleModel
 
-A simple example of an SEIRS epidemiological model using the [FAIR Data Pipeline](https://fairdatapipeline.github.io).
+A simple example of an SEIRS epidemiological model using the [FAIR Data Pipeline](https://fairdatapipeline.org).
 
 ## Installation of dependencies
 
