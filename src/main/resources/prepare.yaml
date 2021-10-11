@@ -2,7 +2,7 @@ run_metadata:
   description: SEIRS Prepare parameters DP
   default_output_namespace: bram
   script: |
-    gradle run --args "--prepare ${{CONFIG_DIR}}"
+    gradle run --args="--prepare ${{CONFIG_DIR}}"
 
 write:
   - data_product: SEIRS_model/preparedParams
