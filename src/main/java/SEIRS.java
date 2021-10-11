@@ -104,7 +104,7 @@ class SEIRS {
 
     void do_SEIRS(Map<String, Double> params, CleanableFileChannel f) throws IOException {
         
-        int N = 1;
+        double N = 1.0;
         int total_time = 5 * 365; // 5 years
         
         int step_per_day_int = 2;
