@@ -1,4 +1,4 @@
-name: build
+name: run with fair cli
 
 on:
   push:
