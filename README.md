@@ -4,7 +4,7 @@ A simple example of an SEIRS epidemiological model using the [FAIR Data Pipeline
 
 ## Installation of dependencies
 
-First, install Java (JDK v.11 or later), and gradle (v.6.5 or later) on your system. Then install the FAIR data registry if it is not already installed - see [here](https://fairdatapipeline.github.io/docs/local_registry/) for instructions. The [javaDataPipeline](https://github.com/FAIRDataPipeline/javaDataPipeline) API is registered on [Maven Central](https://repo1.maven.org/maven2/org/fairdatapipeline/api/), so gradle will automatically resolve it as a dependency.
+First, install Java (JDK v.11 or later), and gradle (v.6.5 or later) on your system. Then install the FAIR data registry if it is not already installed - see [here](https://www.fairdatapipeline.org/docs/data_registry/installation/) for instructions. The [javaDataPipeline](https://github.com/FAIRDataPipeline/javaDataPipeline) API is registered on [Maven Central](https://repo1.maven.org/maven2/org/fairdatapipeline/api/), so gradle will automatically resolve it as a dependency.
 
 ## Installing the command line tools
 
