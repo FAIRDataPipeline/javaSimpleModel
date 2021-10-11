@@ -152,6 +152,7 @@ class SEIRS {
         f.write(ByteBuffer.wrap(line.getBytes(StandardCharsets.UTF_8)));
 
         for (int i = 0; i < time_steps; i++) {
+            N = S[i] + E[i] + I[i] + R[i];
             double dSdt  = mu_d*N - (beta*S[i]*I[i])/N + omega_d*R[i]  - mu_d*S[i]; 
             double dEdt  = -sigma_d*E[i]  + (beta*S[i]*I[i])/N - mu_d*E[i];
             double dIdt  = -gamma_d*I[i]  + sigma_d*E[i]  - (mu_d+alpha)*I[i];
