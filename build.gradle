@@ -11,11 +11,10 @@ application {
 
 repositories {
     mavenCentral()
-    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    implementation 'com.github.FAIRDataPipeline.javaDataPipeline:api:0643d066f4'
+    implementation 'org.fairdatapipeline:api:1.0.0-beta'
     implementation 'com.opencsv:opencsv:5.5.2'
     implementation('org.slf4j:slf4j-simple:1.7.25')
 }
