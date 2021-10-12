@@ -2,6 +2,8 @@
 ![build](https://github.com/FAIRDataPipeline/javaSimpleModel/actions/workflows/gradle-build.yml/badge.svg)
 ![run w fair cli](https://github.com/FAIRDataPipeline/javaSimpleModel/actions/workflows/runWithFairCli.yml/badge.svg)
 [![License: GPL-3.0](https://img.shields.io/badge/licence-GPL--3-yellow)](https://opensource.org/licenses/GPL-3.0)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5564237.svg)](https://doi.org/10.5281/zenodo.5564237)
+
 
 A simple example of an SEIRS epidemiological model using the [FAIR Data Pipeline](http://fairdatapipeline.org).
 
