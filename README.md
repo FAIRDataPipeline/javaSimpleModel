@@ -13,17 +13,7 @@ First, install Java (JDK v.11 or later), and gradle (v.6.5 or later) on your sys
 
 ## Installing the command line tools
 
-If you don't already have the registry initialised and the `fair` command line tool configured, then you need to install that next - see [here](https://github.com/FAIRDataPipeline/FAIR-CLI#installation) for more details. Briefly, with python and poetry (`pip install poetry`) installed:
-
-
-```sh
-git clone https://github.com/FAIRDataPipeline/FAIR-CLI.git
-cd FAIR-CLI
-poetry install
-poetry shell
-```
-
-You are now running in a new shell created by `poetry` that has a copy of the `fair` executable in its path.
+If you don't already have the registry initialised and the `fair` command line tool configured, then you need to install that next - see [here](https://github.com/FAIRDataPipeline/FAIR-CLI#installation).
 
 ## Configuring the registry and running the example in this repo
 
