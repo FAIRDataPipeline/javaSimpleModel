@@ -1,5 +1,5 @@
 run_metadata:
-  default_input_namespace: bram
+  default_input_namespace: testing
   description: SEIRS Model java
   script: |
     gradle run --args "${{CONFIG_DIR}}"
