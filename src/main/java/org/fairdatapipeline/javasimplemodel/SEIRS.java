@@ -1,3 +1,5 @@
+package org.fairdatapipeline.javasimplemodel;
+
 import com.opencsv.exceptions.CsvValidationException;
 import org.fairdatapipeline.api.*;
 import org.fairdatapipeline.file.CleanableFileChannel;

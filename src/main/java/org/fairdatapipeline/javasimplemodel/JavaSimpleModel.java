@@ -1,7 +1,9 @@
+package org.fairdatapipeline.javasimplemodel;
+
 import java.io.File;
 import java.nio.file.Path;
 
-public class main {
+public class JavaSimpleModel {
     public static void main(String[] args) {
         //System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "TRACE");
         if(System.getenv("FDP_LOCAL_TOKEN") == null) {

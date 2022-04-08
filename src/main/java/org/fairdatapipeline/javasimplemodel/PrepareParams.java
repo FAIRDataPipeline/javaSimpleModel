@@ -1,3 +1,5 @@
+package org.fairdatapipeline.javasimplemodel;
+
 import org.fairdatapipeline.api.*;
 
 import java.nio.file.Path;
