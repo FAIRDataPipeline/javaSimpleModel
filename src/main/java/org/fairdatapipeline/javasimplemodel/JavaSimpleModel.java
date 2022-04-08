@@ -3,10 +3,12 @@ package org.fairdatapipeline.javasimplemodel;
 import java.io.File;
 import java.nio.file.Path;
 
+
 public class JavaSimpleModel {
+    private static final String ENV_VAR_NAME = "FDP_LOCAL_TOKEN";
+
     public static void main(String[] args) {
-        //System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "TRACE");
-        if(System.getenv("FDP_LOCAL_TOKEN") == null) {
+        if(System.getenv(ENV_VAR_NAME) == null) {
             System.err.println("The fair CLI needs to set the environment variable FDP_LOCAL_TOKEN to the authorization token for the local registry");
             System.exit(2);
         }
@@ -27,13 +29,13 @@ public class JavaSimpleModel {
         Path scriptFile = Path.of(confDir).resolve("script.sh");
         if(args.length == 1) {
             SEIRS s = new SEIRS();
-            s.runFromExternal(configFile, scriptFile, System.getenv("FDP_LOCAL_TOKEN"));
+            s.runFromExternal(configFile, scriptFile, System.getenv(ENV_VAR_NAME));
         }else if(args[0].equals("--prepare")) {
             PrepareParams pp = new PrepareParams();
-            pp.run(configFile, scriptFile, System.getenv("FDP_LOCAL_TOKEN"));
+            pp.run(configFile, scriptFile, System.getenv(ENV_VAR_NAME));
         }else if(args[0].equals("--seirsFromPrepared")) {
             SEIRS s = new SEIRS();
-            s.runFromPrepared(configFile, scriptFile, System.getenv("FDP_LOCAL_TOKEN"));
+            s.runFromPrepared(configFile, scriptFile, System.getenv(ENV_VAR_NAME));
         }else {
             System.err.println("Usage: gradle run --args=\"[{--seirsFromPrepared,--prepare}] configDir\"");
             System.exit(1);

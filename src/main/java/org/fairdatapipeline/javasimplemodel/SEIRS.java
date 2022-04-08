@@ -4,7 +4,6 @@ import com.opencsv.exceptions.CsvValidationException;
 import org.fairdatapipeline.api.*;
 import org.fairdatapipeline.file.CleanableFileChannel;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,6 +13,8 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import com.opencsv.CSVReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /******************************************************************************
  *  SEIRS ODE model in Java
@@ -24,12 +25,13 @@ import com.opencsv.CSVReader;
  ******************************************************************************/
 
 class SEIRS {
-
-
-    public void SEIRS(){
-
-    }
-
+    private static final Logger logger = LoggerFactory.getLogger(SEIRS.class);
+    private static final String INV_G = "inv_gamma";
+    private static final String INV_S = "inv_sigma";
+    private static final String INV_O = "inv_omega";
+    private static final String INV_M = "inv_mu";
+    private static final String ALPHA = "alpha";
+    private static final String BETA = "beta";
 
     public void runFromExternal(Path configPath, Path scriptPath, String regToken) {
         try(Coderun cr =  new Coderun(configPath, scriptPath, regToken)) {
@@ -38,26 +40,24 @@ class SEIRS {
             try {
                 Path filepath = dp.getComponent().readLink();
                 FileReader fr = new FileReader(filepath.toString());
-                CSVReader r = new CSVReader(fr);
-                String[] line;
-                int i = 0;
-                r.readNext(); // ignore header
-                while ((line = r.readNext()) != null) {
-                    params.put(line[0], Double.parseDouble(line[1]));
-                    i += 1;
+                try(CSVReader r = new CSVReader(fr)) {
+                    String[] line;
+                    r.readNext(); // ignore header
+                    while ((line = r.readNext()) != null) {
+                        params.put(line[0], Double.parseDouble(line[1]));
+                    }
                 }
             }catch(FileNotFoundException e){
-                System.out.println("FileNotFoundException: can't find the file: " + e);
-                e.printStackTrace();
+                logger.error("FileNotFoundException: can't find the file.", e);
                 System.exit(1);
             }catch(IOException e) {
-                System.out.println("error reading parameter CSV: " + e);
+                logger.error("error reading parameter CSV.", e);
                 System.exit(1);
             }catch(CsvValidationException e){
-                System.out.println("bad CSV: " + e);
+                logger.error("bad CSV.", e);
                 System.exit(1);
             }catch(Exception e) {
-                System.out.print("Exception reading parameters: " + e);
+                logger.error("Exception reading parameters: ", e);
                 System.exit(1);
             }
 
@@ -71,7 +71,7 @@ class SEIRS {
                 CleanableFileChannel f = dpw.getComponent().writeFileChannel();
                 do_SEIRS(params, f);
             }catch(IOException e) {
-                System.err.println("failed to write output to file: " + e);
+                logger.error("failed to write output to file: ", e);
             }
 
         }
@@ -86,19 +86,19 @@ class SEIRS {
             params.put("E", (Double) dp.getComponent("E").readEstimate());
             params.put("I", (Double) dp.getComponent("I").readEstimate());
             params.put("R", (Double) dp.getComponent("R").readEstimate());
-            params.put("inv_gamma", (Double) dp.getComponent("inv_gamma").readEstimate());
-            params.put("inv_sigma", (Double) dp.getComponent("inv_sigma").readEstimate());
-            params.put("inv_omega", (Double) dp.getComponent("inv_omega").readEstimate());
-            params.put("inv_mu", (Double) dp.getComponent("inv_mu").readEstimate());
-            params.put("beta", (Double) dp.getComponent("beta").readEstimate());
-            params.put("alpha", (Double) dp.getComponent("alpha").readEstimate());
+            params.put(INV_G, (Double) dp.getComponent(INV_G).readEstimate());
+            params.put(INV_S, (Double) dp.getComponent(INV_S).readEstimate());
+            params.put(INV_O, (Double) dp.getComponent(INV_O).readEstimate());
+            params.put(INV_M, (Double) dp.getComponent(INV_M).readEstimate());
+            params.put(BETA, (Double) dp.getComponent(BETA).readEstimate());
+            params.put(ALPHA, (Double) dp.getComponent(ALPHA).readEstimate());
 
             Data_product_write dpw = cr.get_dp_for_write("SEIRS_model/results/fromPreparedParams");
             try {
                 CleanableFileChannel f = dpw.getComponent().writeFileChannel();
                 do_SEIRS(params, f);
             }catch(IOException e) {
-                System.err.println("failed to write output to file: " + e);
+                logger.error("failed to write output to file.", e);
             }
 
         }
@@ -106,7 +106,7 @@ class SEIRS {
 
     void do_SEIRS(Map<String, Double> params, CleanableFileChannel f) throws IOException {
         
-        double N = 1.0;
+        double N;
         int total_time = 5 * 365; // 5 years
         
         int step_per_day_int = 2;
@@ -133,12 +133,12 @@ class SEIRS {
         
         time[0] = 0;
         
-        double inv_gamma = params.get("inv_gamma");
-        double inv_sigma = params.get("inv_sigma");
-        double inv_omega = params.get("inv_omega");
-        double inv_mu = params.get("inv_mu");
-        double beta = params.get("beta");
-        double alpha= params.get("alpha");
+        double inv_gamma = params.get(INV_G);
+        double inv_sigma = params.get(INV_S);
+        double inv_omega = params.get(INV_O);
+        double inv_mu = params.get(INV_M);
+        double beta = params.get(BETA);
+        double alpha= params.get(ALPHA);
 
     
         double gamma_d = 1 / inv_gamma;

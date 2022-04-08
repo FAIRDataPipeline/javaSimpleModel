@@ -6,8 +6,6 @@ import java.nio.file.Path;
 
 
 public class PrepareParams {
-    public void PrepareParams() {}
-
     public void run(Path configPath, Path scriptPath, String regtoken) {
         try (Coderun cr = new Coderun(configPath, scriptPath, regtoken)){
             Data_product_write dp = cr.get_dp_for_write("SEIRS_model/preparedParams");
