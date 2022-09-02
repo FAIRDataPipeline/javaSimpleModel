@@ -38,6 +38,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.2'
     implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.13.2'
     implementation 'org.slf4j:slf4j-api:1.7.36'
+    implementation 'jakarta.activation:jakarta.activation-api:2.1.0'
 }
 
 spotless {
