@@ -8,3 +8,6 @@ gradlew.bat
 build
 
 .idea
+venv
+.fair/
+data_store/
