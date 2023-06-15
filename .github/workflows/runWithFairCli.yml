@@ -16,9 +16,9 @@ jobs:
       packages: write
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up JDK 11
-      uses: actions/setup-java@v2
+      uses: actions/setup-java@v3
       with:
         java-version: '11'
         distribution: 'adopt'
@@ -30,14 +30,14 @@ jobs:
     - name: Install local registry
       run: |
         /bin/bash -c "$(curl -fsSL https://data.scrc.uk/static/localregistry.sh)"
-    - uses: actions/setup-python@v2
+    - uses: actions/setup-python@v3
       with:
         python-version: '3.x'
     - name: install fair-cli from pip
       run: pip install fair-cli
     - name: run javaSimpleModel with fair cli
       run: |
-        fair init --ci
-        fair pull src/main/resources/seirs-config.yaml
-        fair run  src/main/resources/seirs-config.yaml
+        fair init --ci --local
+        fair pull --local src/main/resources/seirs-config.yaml
+        fair run --local src/main/resources/seirs-config.yaml
         
