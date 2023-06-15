@@ -37,7 +37,7 @@ jobs:
       run: pip install fair-cli
     - name: run javaSimpleModel with fair cli
       run: |
-        fair init --ci
-        fair pull src/main/resources/seirs-config.yaml
-        fair run  src/main/resources/seirs-config.yaml
+        fair init --ci --local
+        fair pull --local src/main/resources/seirs-config.yaml
+        fair run --local src/main/resources/seirs-config.yaml
         
