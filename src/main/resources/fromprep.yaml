@@ -12,5 +12,6 @@ read:
 
 write:
   - data_product: SEIRS_model/results/fromPreparedParams
+    file_type: csv
     use:
       version: 0.0.1

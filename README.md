@@ -30,13 +30,7 @@ At this point you can configure `fair` to run in this repo. Either run:
 fair init
 ```
 
-And fill in your own details, or simply run:
-
-```sh
-fair init --ci
-```
-
-In this case the CLI will initialise the repo with dummy values that are used for continuous integration testing.
+And fill in your own details.
 
 Finally you can run the example!
 
