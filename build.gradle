@@ -1,10 +1,16 @@
 plugins {
     id 'application'
-    id "com.diffplug.spotless" version "6.4.2"
+    id "com.diffplug.spotless" version "8.10.2"
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
 
 application {
     mainClass = 'org.fairdatapipeline.javasimplemodel.JavaSimpleModel'
