@@ -8,3 +8,6 @@ gradlew.bat
 build
 
 .idea
+.fair
+venv
+.venv
